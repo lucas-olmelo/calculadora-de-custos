@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Custos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>Calculadora de Custos</h1>
+    <form action="" method="post" id="form_produto">
+        <div class="">
+            <label for="">Nome do produto:</label>
+            <input type="text" id="input_produto">
+        </div>
+        <button id="botao_criar_produto">Criar produto</button>
+    </form>
+    <form action="" method="post" id="form_insumo">
+        <select name="" id="produto">
+            <option value="">Selecione um produto</option>
+        </select>
+        <div class="">
+            <label for="">Insumo:</label>
+            <input type="text" id="input_insumo">
+        </div>
+        <div class="">
+            <label for="">Qtde de insumo:</label>
+            <input type="number" name="" id="input_qtde">
+        </div>
+        <div class="">
+            <label for="">Qtde de embalagem:</label>
+            <input type="number" name="" id="input_embalagem">
+        </div>
+        <div class="">
+            <label for="">Valor:</label>
+            <input type="number" name="" id="input_valor">
+        </div>
+        <button id="botao_criar">Criar</button>
+    </form>
+
+    <div class="produtos"></div>
+
+    <p id="nome_insumo"></p>
+    <p id="qtde_insumo"></p>
+    <p id="qtde_embalagem"></p>
+    <p id="valor"></p>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
