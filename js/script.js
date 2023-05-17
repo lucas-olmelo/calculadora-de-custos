@@ -11,12 +11,13 @@ function criarProduto(event) {
     var form = document.querySelector('#form_produto');
 
     var option = document.createElement('option');
-    option.textContent = form.input_produto.value
+    option.textContent = form.input_produto.value;
+    option.setAttribute('value', form.input_produto.value + '-' + form.input_lucro.value);
     select.appendChild(option);
 
     var produtosDiv = document.querySelector('.produtos');
     var produto = document.createElement('div');
-    produto.classList.add(form.input_produto.value.replace(/\s/g, ''));
+    produto.classList.add(form.input_produto.value.replace(/\s/g, '') + '-' + form.input_lucro.value);
     var nomeProduto = document.createElement('h3');
     nomeProduto.textContent = form.input_produto.value;
 
@@ -26,6 +27,7 @@ function criarProduto(event) {
     var thead = document.createElement('thead');
     var tbody = document.createElement('tbody');
     var tr = document.createElement('tr');
+
     var th1 = document.createElement('th');
     th1.textContent = 'Insumo';
 
@@ -55,24 +57,33 @@ function criarProduto(event) {
     var parCusto = document.createElement('p');
     parCusto.setAttribute('id', 'custoProd');
     parCusto.textContent = 'Custo de produção: ' + formataValor(0);
+    var parLucro = document.createElement('p');
+    parLucro.textContent = 'Lucro: ' + form.input_lucro.value + '%';
     var valorFinal = document.createElement('p');
     valorFinal.setAttribute('id', 'valorFinal');
     valorFinal.textContent = 'Valor Final do Produto: ' + formataValor(0);
     
     produto.appendChild(parCusto);
+    produto.appendChild(parLucro);
     produto.appendChild(valorFinal);
-
+    
     produtosDiv.appendChild(produto);
+    produtosDiv.classList.remove('desativado');
     
     //Limpa os campos do formulário
     form.reset();
 }
 
-function atualizaValores(produto) {
-    var parCusto = produto.querySelector('#custoProd');
-    parCusto.textContent = 'Custo de produção: ' + formataValor(calculaCustoProducao(produto));
-    var valorFinal = produto.querySelector('#valorFinal');
-    valorFinal.textContent = 'Valor Final do Produto: ' + formataValor(calculaValorFinal(calculaCustoProducao(produto)));
+function adicionarInsumo(event) {
+    event.preventDefault();
+    //Captura e valida o formulário
+    var form = document.querySelector('#form_insumo');
+    var insumo = criaInsumo(form);
+    
+    adicionaInsumoTabela(insumo);
+
+    //Limpa os campos do formulário
+    form.reset();
 }
 
 function adicionaInsumoTabela(insumo) {
@@ -82,21 +93,16 @@ function adicionaInsumoTabela(insumo) {
     var table = produto.querySelector('tbody');
     table.appendChild(novoInsumo);
 
-    atualizaValores(produto);
+    var lucro = String(insumo.nomeProduto).split('-')[1];
+
+    atualizaValores(produto, lucro);
 }
 
-function criaLinhaTabela(insumo) {
-    //Cria a nova linha da tabela
-    var novaLinha = document.createElement('tr');
-
-    //Cria e atribui textos às novas colunas da tabela
-    novaLinha.appendChild(criaCampoTabela(insumo.nomeInsumo, 'nomeInsumo'));
-    novaLinha.appendChild(criaCampoTabela(insumo.qtdeInsumo, 'qtdeInsumo'));
-    novaLinha.appendChild(criaCampoTabela(insumo.qtdeEmbalagem, 'qtdeEmbalagem'));
-    novaLinha.appendChild(criaCampoTabela(formataValor(insumo.valor), 'valor'));
-    novaLinha.appendChild(criaCampoTabela(formataValor(calculaCusto(insumo)), 'custoInsumo'));
-
-    return novaLinha;
+function atualizaValores(produto, lucro) {
+    var parCusto = produto.querySelector('#custoProd');
+    parCusto.textContent = 'Custo de produção: ' + formataValor(calculaCustoProducao(produto));
+    var valorFinal = produto.querySelector('#valorFinal');
+    valorFinal.textContent = 'Valor Final do Produto: ' + formataValor(calculaValorFinal(calculaCustoProducao(produto), lucro));
 }
 
 //Função que formata o valor
@@ -117,33 +123,34 @@ function calculaCustoProducao(produto) {
     return Math.ceil(soma);
 }
 
-function calculaValorFinal(custoProducao) {
-    return Math.ceil(custoProducao * 1.1);
+function calculaValorFinal(custoProducao, lucro) {
+    return Math.ceil(custoProducao + (custoProducao / 100 * lucro));
+}
+
+function criaLinhaTabela(insumo) {
+    //Cria a nova linha da tabela
+    var novaLinha = document.createElement('tr');
+    
+    //Cria e atribui textos às novas colunas da tabela
+    novaLinha.appendChild(criaCampoTabela(insumo.nomeInsumo, 'nomeInsumo'));
+    novaLinha.appendChild(criaCampoTabela(insumo.qtdeInsumo, 'qtdeInsumo'));
+    novaLinha.appendChild(criaCampoTabela(insumo.qtdeEmbalagem, 'qtdeEmbalagem'));
+    novaLinha.appendChild(criaCampoTabela(formataValor(insumo.valor), 'valor'));
+    novaLinha.appendChild(criaCampoTabela(formataValor(calculaCusto(insumo)), 'custoInsumo'));
+    
+    return novaLinha;
 }
 
 function criaCampoTabela(content, className) {
     var td = document.createElement('td');
     td.textContent = content;
     td.classList.add(className);
-
+    
     return td;
 }
 
-function adicionarInsumo(event) {
-    event.preventDefault();
-    //Captura e valida o formulário
-    var form = document.querySelector('#form_insumo');
-    var insumo = criaInsumo(form);
-    
-    adicionaInsumoTabela(insumo);
-
-    //Limpa os campos do formulário
-    form.reset();
-}
-
-
-
 function criaInsumo(form) {
+    console.log(form.produto.value);
     var insumo = {
         nomeProduto: form.produto.value,
         nomeInsumo: form.input_insumo.value,

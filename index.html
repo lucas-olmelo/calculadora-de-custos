@@ -8,43 +8,55 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Calculadora de Custos</h1>
-    <form action="" method="post" id="form_produto">
-        <div class="">
-            <label for="">Nome do produto:</label>
-            <input type="text" id="input_produto">
+    <div class="title_container">
+        <h1>Calculadora de Custos</h1>
+    </div>
+    <div class="container_forms">
+        <div class="container_produto">
+            <form action="" method="post" id="form_produto">
+                <div class="inputs_produto">
+                    <div class="input_line">
+                        <label for="">Nome do produto:</label>
+                        <input type="text" id="input_produto" required>
+                    </div>
+                    <div>
+                        <label>Porcentagem de lucro:</label>
+                        <input id="input_lucro" type="number" required>
+                    </div>
+                </div>
+                <button id="botao_criar_produto">Criar produto</button>
+            </form>
         </div>
-        <button id="botao_criar_produto">Criar produto</button>
-    </form>
-    <form action="" method="post" id="form_insumo">
-        <select name="" id="produto">
-            <option value="">Selecione um produto</option>
-        </select>
-        <div class="">
-            <label for="">Insumo:</label>
-            <input type="text" id="input_insumo">
+        <div class="container_insumo">
+            <form action="" method="post" id="form_insumo">
+                <select name="" id="produto" required>
+                    <option value="">Selecione um produto</option>
+                </select>
+                <div class="inputs_insumos">
+                    <div class="input_line">
+                        <label for="">Insumo:</label>
+                        <input type="text" id="input_insumo" required>
+                    </div>
+                    <div class="input_line">
+                        <label for="">Qtde de insumo:</label>
+                        <input type="number" name="" id="input_qtde" required>
+                    </div>
+                    <div class="input_line">
+                        <label for="">Qtde de embalagem:</label>
+                        <input type="number" name="" id="input_embalagem" required>
+                    </div>
+                    <div class="input_line">
+                        <label for="">Valor:</label>
+                        <input type="number" name="" id="input_valor" required>
+                    </div>
+                </div>
+                <button id="botao_criar">Criar</button>
+            </form>
         </div>
-        <div class="">
-            <label for="">Qtde de insumo:</label>
-            <input type="number" name="" id="input_qtde">
-        </div>
-        <div class="">
-            <label for="">Qtde de embalagem:</label>
-            <input type="number" name="" id="input_embalagem">
-        </div>
-        <div class="">
-            <label for="">Valor:</label>
-            <input type="number" name="" id="input_valor">
-        </div>
-        <button id="botao_criar">Criar</button>
-    </form>
+    </div>
 
-    <div class="produtos"></div>
-
-    <p id="nome_insumo"></p>
-    <p id="qtde_insumo"></p>
-    <p id="qtde_embalagem"></p>
-    <p id="valor"></p>
+    <div class="produtos desativado">
+    </div>
 
     <script src="js/script.js"></script>
 </body>
