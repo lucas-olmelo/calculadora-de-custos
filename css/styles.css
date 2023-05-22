@@ -5,7 +5,6 @@ body {
     box-sizing: border-box;
     line-height: 1;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
 }
 
 .title_container {
@@ -20,8 +19,11 @@ body {
     margin: 0;
 }
 
-.container_forms {
+.page_top {
     background-color: midnightblue;
+}
+
+.container_forms {
     padding: 2%;
     display: flex;
     flex-direction: row;
@@ -29,7 +31,7 @@ body {
 }
 
 .container_produto, .container_insumo {
-    font-size: 18px;
+    font-size: 15px;
     margin: 1% 4%;
     display: flex;
     justify-content: center;
@@ -52,8 +54,8 @@ body {
 
 input {
     height: 25px;
-    width: 250px;
-    font-size: 18px;
+    width: 200px;
+    font-size: 15px;
 }
 
 input {
@@ -64,7 +66,7 @@ select {
     width: 100%;
     height: 30px;
     margin: 1% auto;
-    font-size: 18px;
+    font-size: 15px;
     text-align: center;
 }
 
@@ -84,6 +86,7 @@ button {
     border: 1px solid midnightblue;
     border-radius: 10px;
     cursor: pointer;
+    margin-top: 5%;
 }
 
 .produtos {
@@ -118,4 +121,24 @@ table {
 
 td, th {
     border: 1px solid;
+}
+
+.error_box {
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 2%;
+}
+
+.border-error {
+    border: 2px solid lightcoral;
+}
+
+.text-error {
+    color: red;
+}
+
+ul {
+    color: red;
+    text-align: left;
 }

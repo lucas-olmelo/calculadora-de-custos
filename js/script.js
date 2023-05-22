@@ -6,22 +6,35 @@ botaoCriarInsumo.addEventListener('click', adicionarInsumo);
 
 function criarProduto(event) {
     event.preventDefault();
+
+    removeErrorMessages()
+
     var select = document.querySelector('#produto');
     
     var form = document.querySelector('#form_produto');
+
+    var produto = criaProduto(form);
+
+    var validacao = checaCamposProduto(produto);
+    if (validacao.length > 0) {
+        showErrorMessages(validacao);
+        var errorBox = document.querySelector('.error_box');
+        errorBox.classList.remove('desativado');
+        return;
+    }
 
     var option = document.createElement('option');
     option.textContent = form.input_produto.value;
     option.setAttribute('value', form.input_produto.value + '-' + form.input_lucro.value);
     select.appendChild(option);
 
-    var produtosDiv = document.querySelector('.produtos');
-    var produto = document.createElement('div');
-    produto.classList.add(form.input_produto.value.replace(/\s/g, '') + '-' + form.input_lucro.value);
+    var containerProdutos = document.querySelector('.produtos');
+    var produtoDiv = document.createElement('div');
+    produtoDiv.classList.add(form.input_produto.value.replace(/\s/g, '') + '-' + form.input_lucro.value);
     var nomeProduto = document.createElement('h3');
     nomeProduto.textContent = form.input_produto.value;
 
-    produto.appendChild(nomeProduto);
+    produtoDiv.appendChild(nomeProduto);
     
     var table = document.createElement('table');
     var thead = document.createElement('thead');
@@ -52,7 +65,7 @@ function criarProduto(event) {
     thead.appendChild(tr);
     table.appendChild(thead);
     table.appendChild(tbody);
-    produto.appendChild(table);
+    produtoDiv.appendChild(table);
     
     var parCusto = document.createElement('p');
     parCusto.setAttribute('id', 'custoProd');
@@ -63,12 +76,12 @@ function criarProduto(event) {
     valorFinal.setAttribute('id', 'valorFinal');
     valorFinal.textContent = 'Valor Final do Produto: ' + formataValor(0);
     
-    produto.appendChild(parCusto);
-    produto.appendChild(parLucro);
-    produto.appendChild(valorFinal);
+    produtoDiv.appendChild(parCusto);
+    produtoDiv.appendChild(parLucro);
+    produtoDiv.appendChild(valorFinal);
     
-    produtosDiv.appendChild(produto);
-    produtosDiv.classList.remove('desativado');
+    containerProdutos.appendChild(produtoDiv);
+    containerProdutos.classList.remove('desativado');
     
     //Limpa os campos do formulário
     form.reset();
@@ -150,7 +163,6 @@ function criaCampoTabela(content, className) {
 }
 
 function criaInsumo(form) {
-    console.log(form.produto.value);
     var insumo = {
         nomeProduto: form.produto.value,
         nomeInsumo: form.input_insumo.value,
@@ -160,4 +172,13 @@ function criaInsumo(form) {
     };
     
     return insumo;
+}
+
+function criaProduto(form) {
+    var produto = {
+        nomeProduto: form.input_produto.value,
+        lucro: form.input_lucro.value,
+    };
+    
+    return produto;
 }
