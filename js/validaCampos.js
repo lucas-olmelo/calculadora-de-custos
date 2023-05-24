@@ -16,6 +16,43 @@ function checaCamposProduto(produto) {
 
     return erros;
 }
+
+function checaCamposInsumo(insumo) {
+
+    var erros = [];
+
+    //Verifica se o produto é válido
+    if (validaProduto(insumo.nomeProduto)) {
+        erros.push('Selecione um produto!');
+        addClass('produto');
+    }
+
+    //Verifica se o produto é válido
+    if (validaProduto(insumo.nomeInsumo)) {
+        erros.push('O nome do insumo é inválido!');
+        addClass('input_insumo');
+    }
+
+    //Verifica se o lucro é válido
+    if (!validaLucro(insumo.qtdeInsumo)) {
+        erros.push('A quantidade do insumo é inválida!');
+        addClass('input_qtde');
+    }
+
+    //Verifica se o lucro é válido
+    if (!validaLucro(insumo.qtdeEmbalagem)) {
+        erros.push('A quantidade da embalagem é inválida!');
+        addClass('input_embalagem');
+    }
+
+    //Verifica se o lucro é válido
+    if (!validaLucro(insumo.valor)) {
+        erros.push('O valor do insumo é inválido!');
+        addClass('input_valor');
+    }
+
+    return erros;
+}
 //Função para validação do nome do produto
 function validaProduto(produto) {
     if (!produto) {
@@ -52,6 +89,11 @@ function removeErrorMessages() {
 
     removeClass('input_produto');
     removeClass('input_lucro');
+    removeClass('produto');
+    removeClass('input_insumo');
+    removeClass('input_qtde');
+    removeClass('input_embalagem');
+    removeClass('input_valor');
 }
 
 //Função que adiciona a classe de estilização de erro do formulário

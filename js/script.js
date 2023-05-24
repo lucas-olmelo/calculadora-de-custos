@@ -16,11 +16,15 @@ function criarProduto(event) {
     var produto = criaProduto(form);
 
     var validacao = checaCamposProduto(produto);
+    console.log(validacao);
     if (validacao.length > 0) {
         showErrorMessages(validacao);
         var errorBox = document.querySelector('.error_box');
         errorBox.classList.remove('desativado');
         return;
+    } else {
+        var errorBox = document.querySelector('.error_box');
+        errorBox.classList.add('desativado');
     }
 
     var option = document.createElement('option');
@@ -89,10 +93,24 @@ function criarProduto(event) {
 
 function adicionarInsumo(event) {
     event.preventDefault();
+    removeErrorMessages();
+
     //Captura e valida o formulário
     var form = document.querySelector('#form_insumo');
     var insumo = criaInsumo(form);
     
+    var validacaoInsumo = checaCamposInsumo(insumo);
+    console.log(validacaoInsumo);
+    if (validacaoInsumo.length > 0) {
+        showErrorMessages(validacaoInsumo);
+        var errorBox = document.querySelector('.error_box');
+        errorBox.classList.remove('desativado');
+        return;
+    } else {
+        var errorBox = document.querySelector('.error_box');
+        errorBox.classList.add('desativado');
+    }
+
     adicionaInsumoTabela(insumo);
 
     //Limpa os campos do formulário

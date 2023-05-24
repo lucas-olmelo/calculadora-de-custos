@@ -21,7 +21,7 @@
                             <label for="" id="input_produto_text">Nome do produto:</label>
                             <input type="text" id="input_produto" required>
                         </div>
-                        <div>
+                        <div class="input_line">
                             <label id="input_lucro_text">Porcentagem de lucro:</label>
                             <input id="input_lucro" type="number" required>
                         </div>
@@ -32,24 +32,27 @@
             <div class="container_insumo">
                 <form action="" method="post" id="form_insumo">
                     <h2>Criar insumo</h2>
-                    <select name="" id="produto" required>
-                        <option value="">Selecione um produto</option>
-                    </select>
+                    <div class="input_line">
+                        <label for="" id="produto_text">Produto: </label>
+                        <select name="" id="produto" required>
+                            <option value="">Selecione um produto</option>
+                        </select>
+                    </div>
                     <div class="inputs_insumos">
                         <div class="input_line">
-                            <label for="">Insumo:</label>
+                            <label for="" id="input_insumo_text">Insumo:</label>
                             <input type="text" id="input_insumo" required>
                         </div>
                         <div class="input_line">
-                            <label for="">Qtde de insumo:</label>
+                            <label for="" id="input_qtde_text">Qtde de insumo:</label>
                             <input type="number" name="" id="input_qtde" required>
                         </div>
                         <div class="input_line">
-                            <label for="">Qtde de embalagem:</label>
+                            <label for="" id="input_embalagem_text">Qtde de embalagem:</label>
                             <input type="number" name="" id="input_embalagem" required>
                         </div>
                         <div class="input_line">
-                            <label for="">Valor:</label>
+                            <label for="" id="input_valor_text">Valor:</label>
                             <input type="number" name="" id="input_valor" required>
                         </div>
                     </div>
